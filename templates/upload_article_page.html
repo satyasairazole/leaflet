@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Article Page</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+        integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
+        </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--datapicker-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/js/bootstrap-datepicker.min.js">
+    </script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.2.0/css/datepicker.min.css"
+        rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.3.0/mdb.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="upload_article_page.css">
+    
+<!-- CDN links -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.1/flatly/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<link rel="stylesheet" type="text/css" href="https://www.jqueryscript.net/demo/Tagging-System-Autocomplete-Amsify-Suggestags/css/amsify.suggestags.css">
+
+ <link rel='stylesheet' type='text/css' href={{ url_for('static', filename='styles/upload_article_page.css') }}>
+<!-- Amsify Plugin -->
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<script type="text/javascript" src="https://www.jqueryscript.net/demo/Tagging-System-Autocomplete-Amsify-Suggestags/js/jquery.amsify.suggestags.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script>
+         function function_one_Alert(msg, myYes) {
+            var confirmBox = $("#first_confirm");
+            confirmBox.find(".message").text(msg);
+            confirmBox.find(".yes").unbind().click(function() {
+               confirmBox.hide();
+            });
+            confirmBox.find(".yes").click(myYes);
+            confirmBox.show();
+         }
+		 function function_two_Alert(msg, myYes) {
+            var confirmBox = $("#second_confirm");
+            confirmBox.find(".message").text(msg);
+            confirmBox.find(".yes").unbind().click(function() {
+               confirmBox.hide();
+            });
+            confirmBox.find(".yes").click(myYes);
+            confirmBox.show();
+         }
+      </script>
+
+</head>
+
+<body>
+    <img class="logo" src="https://theleaflet.in/wp-content/uploads/2022/03/The-Leaflet-Logo.png">
+    <!-- <div class="form-popup" id="myFormadd">
+        <form method="post" id="Add_author" enctype="application/x-www-form-urlencoded">
+            <h2>Add Author</h2>
+            <div class="form-floating">
+                <input type="text" placeholder="Add New Authors " class ="form-control" name="author" id="author" >
+            <Button type="submit" class="button" value="Auth" >Add</Button> 
+            </div>    
+          </form>
+      </div> -->
+    <div style="height: 125vh; width: 40%; margin:auto;">
+        <form action="/uploadArticle" method="post" id="myform" enctype="multipart/form-data">
+            <div class="form-floating">
+                <input class="form-control floatingInput" name="title" placeholder="" type="text" required>
+                <label for="floatingInput">Title</label>
+            </div>
+            <div class="form-floating">
+                <input class="form-control floatingInput" name="pubDate" placeholder="" type="datetime-local" step="1"
+                    name="datepicker" required>
+                <label for="floatingInput">Publish Date</label>
+            </div>
+            <!-- <div class="form-floating">
+                <input class="form-control floatingInput" name="creator" placeholder="" type="text" required>
+                <label for="floatingInputGrid">Creator </label><br>
+            </div> -->
+            <div class="form-floating mt-0" style="height: 200px;">
+                <textarea class="form-control h-75" rows="5000" cols="90" name="content" placeholder=""
+                    required></textarea>
+                <label for="floatingTextarea">Content</label><br>
+            </div>
+            <input type="text" class="form-control mt-0" name="author" placeholder="author"/>
+            <!-- <button id="Add" onclick="openForm()">Add New Authors</button>   -->    
+            <input type="text" class="form-control mt-3" name="tags" placeholder="tags"/>
+            <div class="flex">
+            <input type="text" class="form-control mt-3" name="category" placeholder="category" /><i id="myBtn"class="fa fa-plus"></i>
+            </div>
+            <div id="demo"></div>
+			<div id='newcategory'></div>
+			<div id='subcategory'></div>
+            <input class="form-control floatingInput mt-3" type="text" name="image_url" placeholder="image url">
+            <input class="form-control floatingInput mt-3" type="text" name="post_url" placeholder="post url">
+            
+            <Button class="button mt-4" type="submit">Upload</Button>
+        </form>
+    </div>
+	<!-------------------hidden boxes--------------->
+		<div id="first_confirm">
+         <div class="message">
+		 <form  action="/addMainCat"method="POST"><div class='addnewcategory'>
+		<!-- <button class="yes" >OK</button>-->
+		 <h5>Add New Category</h5><input type='text' id='subfield' name='main_category'><br><input id='submitcat'type='submit' value='Submit'></div></form>	 
+		 </div><br>
+         
+      </div>
+	    <div id="second_confirm">
+		
+         <div class="message">
+		 
+		 <form method="POST" action="/addSubCat"><div class='subcategory'>
+		 <input type="button" value="Click Me" style="float: right;">
+		 <!--<button class="yes" style="float:right;"></button>-->
+		 <h5>select main category</h5><br> <label for='newcatval'>Choose a Category:</label><select name='main_category' id='newcatval'>  <option value='first'>Frist category</option>  <option value='second'>second category</option>  <option value='third'>third category</option> <option value='four'>forthcategory</option></select><h5>add your submfield</h5>  <input type='text' id='subfield' name='sub_category'><br><br><input id='submitcat' type='submit' value='Submit'></div></form>
+		 
+		 </div><br>
+         
+      </div>
+		<!-------------------hidden boxes--------------->
+
+</body>
+<script>
+document.getElementById("myBtn").onclick = displayDate;
+
+function displayDate() {
+    document.getElementById("demo").innerHTML = "<div class='add_new'><button id='newcat'onclick='function_one_Alert()'>add new category</button><button id='subcat' onclick='function_two_Alert()'>add sub category</button> </div>";
+
+/*document.getElementById("newcat").onclick = newCategory;
+function newCategory() {
+    document.getElementById("newcategory").innerHTML = "<form><div class='addnewcategory'><h5>Add New Category</h5><input type='text' id='subfield' name='subfield'><br><input id='submitcat'type='submit' value='Submit'></div></form>";
+}
+
+document.getElementById("subcat").onclick = subCategory;
+function subCategory() {
+    document.getElementById("subcategory").innerHTML = "<form><div class='subcategory'><h5>select main category</h5><br> <label for='newcatval'>Choose a Category:</label><select name='newcatval' id='newcatval'>  <option value='first'>Frist category</option>  <option value='second'>second category</option>  <option value='third'>third category</option> <option value='four'>forthcategory</option></select><h5>add your submfield</h5>  <input type='text' id='subfield' name='subfield'><br><br><input id='submitcat' type='submit' value='Submit'></div></form>";
+}*/
+
+}
+// function openForm() {
+//   document.getElementById("myFormadd").style.display = "block";
+// }
+
+// function closeForm() {
+//   document.getElementById("myFormadd").style.display = "none";
+// }
+
+//     const Author = document.getElementById('myFormadd');
+
+//     // var Author = document.getElementById('author').value;
+//     Author.addEventListener('submit',async function (e) {
+//     e.preventDefault();
+//     // console.log(Author);
+//     // alert(Author);
+//     const payload1= FormData(Author);
+//     console.log(payload1);
+
+//      var values = [...payload1.values()]
+//     console.log(values);
+//     // alert(values);
+//     //      var response = await fetch('http://3.109.88.105:5000/add_author', {
+//     //     method: 'POST',
+//     //     body: payload,
+//     //     // headers: {'Access-Control-Allow-Origin':'*'}
+
+//     // })
+//     // if (response.ok) { // if HTTP-status is 200-299
+//     //     // get the response body (the method explained below)
+//     //     let json = await response.text();
+//     //     console.log(json)
+//     //     alert("Author is added");
+//     // } else {
+//     //     alert("failed to Add Author");
+//     // }
+
+//     });
+    const form = document.getElementById('myform');
+form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const payload = new FormData(form);
+    var values = [...payload.values()]
+    console.log(values);
+
+     var response = await fetch('http://3.109.88.105:5000/uploadPost', {
+         method: 'POST',
+         body: payload,
+         // headers: {'Access-Control-Allow-Origin':'*'}
+     })
+     if (response.ok) { // if HTTP-status is 200-299
+         // get the response body (the method explained below)
+         let json = await response.text();
+         console.log(json)
+         alert("article uploaded");
+     } else {
+         alert("failed to upload article");
+     }
+});
+
+    (async function () 
+   { 
+       var response_category= await fetch('http://3.109.88.105:5000/get_categories');
+       var response_post_authors = await fetch('http://3.109.88.105:5000/get_authors');
+       var response_post_tags = await fetch('http://3.109.88.105:5000/get_tags')
+       if (response_category.ok && response_post_authors.ok &&response_post_tags.ok){
+        let category = await response_category.json();
+        let author = await response_post_authors.json();
+        let tags = await response_post_tags.json();
+        $('input[name="category"]').amsifySuggestags({
+            suggestions: category['categories'],
+        });
+        $('input[name="author"]').amsifySuggestags({
+            suggestions: author['authors'],
+        });
+        $('input[name="tags"]').amsifySuggestags({
+            suggestions: tags['tags'],
+        })
+    }
+})();
+// const form = document.getElementById("myform");
+// form.addEventListener('submit', async function (e) {
+// e.preventDefault();
+// const payload = new FormData(form);
+// var response= await fetch('http://3.109.88.105:5000/get_categories');
+// if (response.ok){
+//     let datajson = await response.json();
+//     alert([...payload.values()]);
+// }
+//});
+
+  
+</script>
+
+</html>
